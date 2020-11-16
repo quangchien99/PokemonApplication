@@ -1,8 +1,16 @@
 package com.example.pokemonapplication.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "favorite")
 public class Pokemon {
+    @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "name")
     private String name;
+
     private String url;
 
     public Pokemon() {
