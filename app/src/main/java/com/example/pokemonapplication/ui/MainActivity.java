@@ -1,13 +1,16 @@
 package com.example.pokemonapplication.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.model.PokemonResponse;
 import com.example.pokemonapplication.network.PokemonModule;
+import com.example.pokemonapplication.viewmodel.PokemonViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
