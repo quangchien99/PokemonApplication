@@ -1,7 +1,5 @@
 package com.example.pokemonapplication.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
 
 import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
@@ -9,26 +7,17 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.functions.Function;
-import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 import com.example.pokemonapplication.model.Pokemon;
-import com.example.pokemonapplication.model.PokemonResponse;
 import com.example.pokemonapplication.repository.PokemonRepository;
 import com.example.pokemonapplication.utils.Const;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PokemonViewModel extends ViewModel {
-     PokemonRepository pokemonRepository;
+    PokemonRepository pokemonRepository;
 
     private MutableLiveData<List<Pokemon>> mNetworkPokemons = new MutableLiveData<>();
     private LiveData<List<Pokemon>> mFavoritePokemons = null;
