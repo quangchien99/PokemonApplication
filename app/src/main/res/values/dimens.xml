@@ -5,4 +5,7 @@
     <dimen name="width_80dp">80dp</dimen>
     <dimen name="height_80dp">80dp</dimen>
     <dimen name="margin_left_15dp">15dp</dimen>
+    <dimen name="height_200dp">200dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="text_size_15sp">15sp</dimen>
 </resources>

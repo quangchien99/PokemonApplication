@@ -23,11 +23,23 @@ import com.example.pokemonapplication.viewmodel.PokemonViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PokemonListFragment extends Fragment {
+    private static PokemonListFragment INSTANCE;
     private RecyclerView rvPokemon;
     private List<Pokemon> pokemons;
     private PokemonAdapter pokemonAdapter;
     private PokemonViewModel pokemonViewModel;
+
+    public static PokemonListFragment getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new PokemonListFragment();
+        }
+        return INSTANCE;
+    }
+
+    public PokemonListFragment() {
+    }
 
     @Nullable
     @Override

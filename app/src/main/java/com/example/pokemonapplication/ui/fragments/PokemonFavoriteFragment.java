@@ -23,10 +23,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PokemonFavoriteFragment extends Fragment {
+    private static PokemonFavoriteFragment INSTANCE;
     private RecyclerView rvPokemon;
     private List<Pokemon> pokemons;
     private PokemonAdapter pokemonAdapter;
     private PokemonViewModel pokemonViewModel;
+
+    public static PokemonFavoriteFragment getINSTANCE() {
+        if (INSTANCE == null) {
+            INSTANCE = new PokemonFavoriteFragment();
+        }
+        return INSTANCE;
+    }
+
+    public PokemonFavoriteFragment() {
+    }
 
     @Nullable
     @Override

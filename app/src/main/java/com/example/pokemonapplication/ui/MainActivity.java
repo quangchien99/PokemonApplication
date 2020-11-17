@@ -1,10 +1,14 @@
 package com.example.pokemonapplication.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.example.pokemonapplication.R;
@@ -17,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private PokemonViewModel viewModel;
     private ViewPager vpPokemon;
     private TabLayout tabPokemon;
@@ -30,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById();
+        navPokemon.setNavigationItemSelectedListener(this);
         pokemonPagerAdapter = new PokemonPagerAdapter(getSupportFragmentManager());
         vpPokemon.setAdapter(pokemonPagerAdapter);
         tabPokemon.setupWithViewPager(vpPokemon);
+
     }
 
     private void findViewById() {
@@ -40,5 +46,25 @@ public class MainActivity extends AppCompatActivity {
         tabPokemon = findViewById(R.id.tab_layout);
         navPokemon = findViewById(R.id.nav_pokemon);
         drawerLayout = findViewById(R.id.layout_drawer);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_list: {
+
+                vpPokemon.setCurrentItem(0);
+                break;
+            }
+            case R.id.item_favorite: {
+                vpPokemon.setCurrentItem(1);
+                break;
+            }
+            case R.id.item_about: {
+                Toast.makeText(getApplicationContext(), "Quang Chien Pham", Toast.LENGTH_LONG);
+                break;
+            }
+        }
+        return true;
     }
 }

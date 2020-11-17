@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/height_200dp"
+    android:background="@color/colorPrimaryLight"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/height_80dp"
+        android:layout_height="@dimen/height_80dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_20dp"
         android:scaleType="center"
         android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Quang Chien Pham"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/text_size_15sp"
+        android:textStyle="italic" />
 </LinearLayout>
