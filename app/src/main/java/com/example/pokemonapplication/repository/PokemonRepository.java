@@ -13,6 +13,7 @@ import com.example.pokemonapplication.network.PokemonService;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 
 public class PokemonRepository {
@@ -24,7 +25,7 @@ public class PokemonRepository {
         this.pokemonService = PokemonModule.getInstance();
     }
 
-    public Call<PokemonResponse> getPokemons() {
+    public Observable<PokemonResponse> getPokemons() {
         return pokemonService.getPokemons();
     }
 
