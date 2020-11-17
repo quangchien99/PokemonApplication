@@ -3,35 +3,28 @@ package com.example.pokemonapplication.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.model.Pokemon;
-import com.example.pokemonapplication.model.PokemonResponse;
-import com.example.pokemonapplication.network.PokemonModule;
 import com.example.pokemonapplication.viewmodel.PokemonViewModel;
-import com.example.pokemonapplication.viewmodel.PokemonViewModelFactory;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    private PokemonViewModel viewModel;
+    PokemonViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewModel = ViewModelProviders.of(this, new PokemonViewModelFactory(getApplication()))
-                .get(PokemonViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PokemonViewModel.class);
         viewModel.fetchPokemonFromNetwork();
         viewModel.getmNetworkPokemons().observe(this, new Observer<List<Pokemon>>() {
             @Override

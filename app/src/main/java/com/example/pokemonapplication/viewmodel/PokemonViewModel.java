@@ -3,6 +3,7 @@ package com.example.pokemonapplication.viewmodel;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,13 +28,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PokemonViewModel extends ViewModel {
-    private PokemonRepository pokemonRepository;
+     PokemonRepository pokemonRepository;
 
     private MutableLiveData<List<Pokemon>> mNetworkPokemons = new MutableLiveData<>();
     private LiveData<List<Pokemon>> mFavoritePokemons = null;
 
-    public PokemonViewModel(Application application) {
-        this.pokemonRepository = new PokemonRepository(application);
+    @ViewModelInject
+    public PokemonViewModel(PokemonRepository pokemonRepository) {
+        this.pokemonRepository = pokemonRepository;
         this.mFavoritePokemons = pokemonRepository.getFavoritePokemons();
     }
 

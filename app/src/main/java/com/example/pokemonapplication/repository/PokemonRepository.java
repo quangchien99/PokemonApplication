@@ -1,28 +1,26 @@
 package com.example.pokemonapplication.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
 import com.example.pokemonapplication.db.PokemonDAO;
-import com.example.pokemonapplication.db.PokemonDatabase;
 import com.example.pokemonapplication.model.Pokemon;
 import com.example.pokemonapplication.model.PokemonResponse;
-import com.example.pokemonapplication.network.PokemonModule;
 import com.example.pokemonapplication.network.PokemonService;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.rxjava3.core.Observable;
-import retrofit2.Call;
 
 public class PokemonRepository {
     private PokemonDAO pokemonDAO;
     private PokemonService pokemonService;
 
-    public PokemonRepository(Application application) {
-        this.pokemonDAO = PokemonDatabase.getPokemonDatabase(application).getPokemonDAO();
-        this.pokemonService = PokemonModule.getInstance();
+    @Inject
+    public PokemonRepository(PokemonDAO pokemonDAO, PokemonService pokemonService) {
+        this.pokemonDAO = pokemonDAO;
+        this.pokemonService = pokemonService;
     }
 
     public Observable<PokemonResponse> getPokemons() {
