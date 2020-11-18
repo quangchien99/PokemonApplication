@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/layout_margin_10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="pokemon"
+            type="com.example.pokemonapplication.model.Pokemon" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_10dp">
 
-        <ImageView
-            android:id="@+id/img_avatar"
-            android:layout_width="@dimen/width_80dp"
-            android:layout_height="@dimen/height_80dp"
-            android:layout_margin="@dimen/layout_margin_10dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_name"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/margin_left_15dp"
-            android:layout_toRightOf="@id/img_avatar"
-            android:textStyle="bold"
-            />
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                set_src="@{pokemon.url}"
+                android:layout_width="@dimen/width_80dp"
+                android:layout_height="@dimen/height_80dp"
+                android:layout_margin="@dimen/layout_margin_10dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/margin_left_15dp"
+                android:layout_toRightOf="@id/img_avatar"
+                android:text="@{pokemon.name}"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

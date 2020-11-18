@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-
 import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.adapter.PokemonPagerAdapter;
 import com.example.pokemonapplication.databinding.ActivityMainBinding;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.item_about: {
-                Toast.makeText(getApplicationContext(), "Quang Chien Pham", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "Quang Chien Pham", Toast.LENGTH_LONG).show();
                 break;
             }
         }
