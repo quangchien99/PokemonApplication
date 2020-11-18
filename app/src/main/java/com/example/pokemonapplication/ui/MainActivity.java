@@ -2,20 +2,17 @@ package com.example.pokemonapplication.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
 import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.adapter.PokemonPagerAdapter;
+import com.example.pokemonapplication.databinding.ActivityMainBinding;
 import com.example.pokemonapplication.viewmodel.PokemonViewModel;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -23,41 +20,32 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private PokemonViewModel viewModel;
-    private ViewPager vpPokemon;
-    private TabLayout tabPokemon;
-    private NavigationView navPokemon;
-    private DrawerLayout drawerLayout;
     private PokemonPagerAdapter pokemonPagerAdapter;
+    private ActivityMainBinding activityMainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViewById();
-        navPokemon.setNavigationItemSelectedListener(this);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
         pokemonPagerAdapter = new PokemonPagerAdapter(getSupportFragmentManager());
-        vpPokemon.setAdapter(pokemonPagerAdapter);
-        tabPokemon.setupWithViewPager(vpPokemon);
+        activityMainBinding.vpPokemon.setAdapter(pokemonPagerAdapter);
+        activityMainBinding.tabLayout.setupWithViewPager(activityMainBinding.vpPokemon);
+        activityMainBinding.navPokemon.setNavigationItemSelectedListener(this);
 
     }
 
-    private void findViewById() {
-        vpPokemon = findViewById(R.id.vp_pokemon);
-        tabPokemon = findViewById(R.id.tab_layout);
-        navPokemon = findViewById(R.id.nav_pokemon);
-        drawerLayout = findViewById(R.id.layout_drawer);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_list: {
 
-                vpPokemon.setCurrentItem(0);
+                activityMainBinding.vpPokemon.setCurrentItem(0);
                 break;
             }
             case R.id.item_favorite: {
-                vpPokemon.setCurrentItem(1);
+                activityMainBinding.vpPokemon.setCurrentItem(1);
                 break;
             }
             case R.id.item_about: {
