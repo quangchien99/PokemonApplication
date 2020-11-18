@@ -57,10 +57,8 @@ public class PokemonListFragment extends Fragment {
         pokemonViewModel.getmNetworkPokemons().observe(getViewLifecycleOwner(), new Observer<List<Pokemon>>() {
             @Override
             public void onChanged(List<Pokemon> data) {
-                Log.d("qcpTag", "Data changed with size is: " + pokemons.size());
-                pokemons.clear();
-                pokemons.addAll(data);
-                pokemonAdapter.notifyDataSetChanged();
+                pokemonAdapter.setData(data);
+                Log.d("qcpTag", "ListFragment: Data changed with size is: " + pokemons.size());
             }
         });
         setUpSwipeItem();

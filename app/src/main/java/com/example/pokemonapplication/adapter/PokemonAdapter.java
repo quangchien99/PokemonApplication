@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pokemonapplication.databinding.ItemPokemonBinding;
@@ -36,6 +37,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
     @Override
     public int getItemCount() {
         return pokemons.size();
+    }
+
+    public void setData(List<Pokemon> data) {
+        PokemonDiffUtil pokemonDiffUtil = new PokemonDiffUtil(this.pokemons, data);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(pokemonDiffUtil);
+        this.pokemons.clear();
+        pokemons.addAll(data);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

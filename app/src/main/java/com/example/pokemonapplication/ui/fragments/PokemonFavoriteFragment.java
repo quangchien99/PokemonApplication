@@ -1,6 +1,7 @@
 package com.example.pokemonapplication.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,8 @@ public class PokemonFavoriteFragment extends Fragment {
         pokemonViewModel.getmFavoritePokemons().observe(getViewLifecycleOwner(), new Observer<List<Pokemon>>() {
             @Override
             public void onChanged(List<Pokemon> data) {
-                pokemons.clear();
-                pokemons.addAll(data);
-                pokemonAdapter.notifyDataSetChanged();
+                pokemonAdapter.setData(data);
+                Log.d("qcpTag", "FavoriteFragment: Data changed with size is: " + pokemons.size());
             }
         });
         setUpSwipeItem();
