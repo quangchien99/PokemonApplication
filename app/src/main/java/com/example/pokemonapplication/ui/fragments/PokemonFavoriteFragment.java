@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokemonapplication.adapter.PokemonAdapter;
+import com.example.pokemonapplication.adapter.PokemonListAdapter;
 import com.example.pokemonapplication.databinding.FragmentPokemonBinding;
 import com.example.pokemonapplication.model.Pokemon;
 import com.example.pokemonapplication.viewmodel.PokemonViewModel;
@@ -26,7 +27,7 @@ import java.util.List;
 public class PokemonFavoriteFragment extends Fragment {
     private static PokemonFavoriteFragment INSTANCE;
     private List<Pokemon> pokemons;
-    private PokemonAdapter pokemonAdapter;
+    private PokemonListAdapter pokemonAdapter;
     private PokemonViewModel pokemonViewModel;
     private FragmentPokemonBinding fragmentPokemonBinding;
 
@@ -45,7 +46,7 @@ public class PokemonFavoriteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentPokemonBinding = FragmentPokemonBinding.inflate(inflater, container, false);
         pokemons = new ArrayList<>();
-        pokemonAdapter = new PokemonAdapter(pokemons, getContext());
+        pokemonAdapter = new PokemonListAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         fragmentPokemonBinding.rvPokemon.setLayoutManager(layoutManager);
@@ -55,7 +56,9 @@ public class PokemonFavoriteFragment extends Fragment {
         pokemonViewModel.getmFavoritePokemons().observe(getViewLifecycleOwner(), new Observer<List<Pokemon>>() {
             @Override
             public void onChanged(List<Pokemon> data) {
-                pokemonAdapter.setData(data);
+                pokemons.clear();
+                pokemons.addAll(data);
+                pokemonAdapter.submitList(data);
                 Log.d("qcpTag", "FavoriteFragment: Data changed with size is: " + pokemons.size());
             }
         });
@@ -77,6 +80,7 @@ public class PokemonFavoriteFragment extends Fragment {
                 Pokemon pokemon = pokemons.get(position);
                 pokemonViewModel.deleteOnePokemon(pokemon.getName());
                 pokemonAdapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Pokemon - " + pokemon.getName() + "is not favorite anymore.", Toast.LENGTH_SHORT).show();
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
