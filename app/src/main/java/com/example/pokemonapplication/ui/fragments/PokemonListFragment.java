@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.adapter.PokemonAdapter;
+import com.example.pokemonapplication.databinding.FragmentPokemonBinding;
 import com.example.pokemonapplication.model.Pokemon;
 import com.example.pokemonapplication.viewmodel.PokemonViewModel;
 
@@ -26,10 +26,10 @@ import java.util.List;
 
 public class PokemonListFragment extends Fragment {
     private static PokemonListFragment INSTANCE;
-    private RecyclerView rvPokemon;
     private List<Pokemon> pokemons;
     private PokemonAdapter pokemonAdapter;
     private PokemonViewModel pokemonViewModel;
+    private FragmentPokemonBinding fragmentPokemonBinding;
 
     public static PokemonListFragment getINSTANCE() {
         if (INSTANCE == null) {
@@ -44,13 +44,13 @@ public class PokemonListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pokemon, container, false);
-        rvPokemon = view.findViewById(R.id.rv_pokemon);
+        fragmentPokemonBinding = FragmentPokemonBinding.inflate(inflater, container, false);
         pokemons = new ArrayList<>();
         pokemonAdapter = new PokemonAdapter(pokemons, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rvPokemon.setLayoutManager(layoutManager);
-        rvPokemon.setAdapter(pokemonAdapter);
+
+        fragmentPokemonBinding.rvPokemon.setLayoutManager(layoutManager);
+        fragmentPokemonBinding.rvPokemon.setAdapter(pokemonAdapter);
 
         pokemonViewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
         pokemonViewModel.fetchPokemonFromNetwork();
@@ -64,7 +64,7 @@ public class PokemonListFragment extends Fragment {
             }
         });
         setUpSwipeItem();
-        return view;
+        return fragmentPokemonBinding.getRoot();
     }
 
     private void setUpSwipeItem() {
@@ -86,6 +86,6 @@ public class PokemonListFragment extends Fragment {
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(rvPokemon);
+        itemTouchHelper.attachToRecyclerView(fragmentPokemonBinding.rvPokemon);
     }
 }
