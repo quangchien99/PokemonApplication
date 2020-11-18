@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,8 +80,20 @@ public class PokemonListFragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 Pokemon pokemon = pokemons.get(position);
-                pokemonViewModel.insertPokemon(pokemon);
-                pokemonAdapter.notifyDataSetChanged();
+                boolean isExist = false;
+                for (Pokemon p : pokemonViewModel.getmFavoritePokemons().getValue()) {
+                    if (p.getName().equals(pokemon.getName())) {
+                        isExist = true;
+                        continue;
+                    }
+                }
+                if (isExist) {
+                    Toast.makeText(getContext(), "Pokemon - " + pokemon.getName() + " already is favorite.", Toast.LENGTH_LONG).show();
+                    pokemonAdapter.notifyDataSetChanged();
+                } else {
+                    pokemonViewModel.insertPokemon(pokemon);
+                    pokemonAdapter.notifyDataSetChanged();
+                }
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
