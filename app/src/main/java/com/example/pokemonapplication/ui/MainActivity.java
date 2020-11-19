@@ -3,6 +3,7 @@ package com.example.pokemonapplication.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.adapter.PokemonPagerAdapter;
 import com.example.pokemonapplication.databinding.ActivityMainBinding;
+import com.example.pokemonapplication.service.BackgroundSoundService;
 import com.example.pokemonapplication.viewmodel.PokemonViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -24,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        startService(new Intent(MainActivity.this, BackgroundSoundService.class));
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
         pokemonPagerAdapter = new PokemonPagerAdapter(getSupportFragmentManager());
@@ -34,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(MainActivity.this, BackgroundSoundService.class));
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
