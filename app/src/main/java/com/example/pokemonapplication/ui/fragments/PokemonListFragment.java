@@ -2,9 +2,13 @@ package com.example.pokemonapplication.ui.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pokemonapplication.R;
 import com.example.pokemonapplication.adapter.PokemonListAdapter;
 import com.example.pokemonapplication.databinding.FragmentPokemonBinding;
 import com.example.pokemonapplication.model.Pokemon;
@@ -47,7 +52,7 @@ public class PokemonListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentPokemonBinding = FragmentPokemonBinding.inflate(inflater, container, false);
         pokemons = new ArrayList<>();
-        pokemonAdapter = new PokemonListAdapter();
+        pokemonAdapter = new PokemonListAdapter(getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         fragmentPokemonBinding.rvPokemon.setLayoutManager(layoutManager);
@@ -67,6 +72,25 @@ public class PokemonListFragment extends Fragment {
         setUpSwipeItem();
         return fragmentPokemonBinding.getRoot();
     }
+
+//    @Override
+//    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        MenuInflater menuInflater = getActivity().getMenuInflater();
+//        menuInflater.inflate(R.menu.menu_long_press_in_list, menu);
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == R.id.item_show) {
+//
+//        } else if (item.getItemId() == R.id.item_add_to_favorite) {
+//
+//        } else {
+//            return false;
+//        }
+//        return true;
+//    }
 
     private void setUpSwipeItem() {
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(

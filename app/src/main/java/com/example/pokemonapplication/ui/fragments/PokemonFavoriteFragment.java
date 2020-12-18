@@ -46,7 +46,7 @@ public class PokemonFavoriteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentPokemonBinding = FragmentPokemonBinding.inflate(inflater, container, false);
         pokemons = new ArrayList<>();
-        pokemonAdapter = new PokemonListAdapter();
+        pokemonAdapter = new PokemonListAdapter(getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         fragmentPokemonBinding.rvPokemon.setLayoutManager(layoutManager);
