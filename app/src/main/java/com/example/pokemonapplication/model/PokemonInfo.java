@@ -1,6 +1,9 @@
 package com.example.pokemonapplication.model;
 
+import com.example.pokemonapplication.utils.Const;
+
 import java.util.List;
+import java.util.Random;
 
 public class PokemonInfo {
     private int id;
@@ -9,6 +12,13 @@ public class PokemonInfo {
     private int weight;
     private int experience;
     private List<String> type;
+
+    private Random random = new Random();
+    private int hp = random.nextInt(Const.MAX_HP);
+    private int def = random.nextInt(Const.MAX_DEF);
+    private int atk = random.nextInt(Const.MAX_ATK);
+    private int speed = random.nextInt(Const.MAX_SPEED);
+    private int exp = random.nextInt(Const.MAX_EXP);
 
     public PokemonInfo() {
     }
@@ -20,6 +30,46 @@ public class PokemonInfo {
         this.weight = weight;
         this.experience = experience;
         this.type = type;
+    }
+
+    public String getHpString() {
+        return Integer.toString(hp) + "/" + Const.MAX_HP;
+    }
+
+    public String getDefString() {
+        return Integer.toString(def) + "/" + Const.MAX_DEF;
+    }
+
+    public String getAtkString() {
+        return Integer.toString(atk) + "/" + Const.MAX_ATK;
+    }
+
+    public String getSpeedString() {
+        return Integer.toString(speed) + "/" + Const.MAX_SPEED;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public int getAtk() {
+        return atk;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public String getExpString() {
+        return Integer.toString(exp) + "/" + Const.MAX_EXP;
     }
 
     public int getId() {
